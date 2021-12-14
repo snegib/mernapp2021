@@ -1,5 +1,6 @@
 import React from 'react';
 import SearchInput from './SearchInput';
+import axios from 'axios';
 
 class App extends React.Component {
   constructor(props) {
