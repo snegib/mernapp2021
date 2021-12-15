@@ -1,8 +1,9 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 
 const Navbar = props => {
- 
+    const navigate = useNavigate();
+    setTimeout(()=>{navigate('/')}, 5000)
   
   return (
     <nav className="ui raised very padded segment">
