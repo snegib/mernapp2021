@@ -1,10 +1,17 @@
 import React from 'react';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink, withRouter } from 'react-router-dom'; // withRouter is higher order component
 
 const Navbar = props => {
-    const navigate = useNavigate();
-    setTimeout(()=>{navigate('/')}, 5000)
-  
+  // V6
+  // const navigate = useNavigate();
+  // setTimeout(()=>{navigate('/')}, 5000)
+
+  //V5
+//   setTimeout(() => {
+//     props.history.push('/about');
+//   }, 2000);
+//   console.log(props);
+
   return (
     <nav className="ui raised very padded segment">
       <a className="ui teal inverted segment">Gloria</a>
@@ -23,4 +30,4 @@ const Navbar = props => {
   );
 };
 
-export default Navbar;
+export default withRouter(Navbar);

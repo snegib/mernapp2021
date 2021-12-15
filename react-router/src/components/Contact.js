@@ -1,22 +1,46 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const Contact = (props) => {
-   
+const Contact = props => {
+  // setTimeout(()=>{
+  //     props.history.push("/about")
+  // }, 2000)
+  // console.log(props)
+
   return (
-    <div
-      className="ui raised very padded text container segment"
-      style={{ marginTop: '80px' }}
-    >
-      <h3 className="ui header">Contact</h3>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris pharetra
-        malesuada ipsum, id ornare mauris varius vel. Interdum et malesuada
-        fames ac ante ipsum primis in faucibus. Suspendisse et fringilla elit.
-        Ut arcu tellus, venenatis luctus sapien vel, sodales rhoncus libero.
-        Pellentesque nec tempus libero. Nullam at dapibus dolor, sit amet auctor
-        leo. Vestibulum luctus faucibus pellentesque. Nunc condimentum nunc quis
-        sagittis ultrices. Proin ultricies vel mauris ac gravida.
-      </p>
+    <div>
+      <div
+        className="ui raised very padded text container segment"
+        style={{ marginTop: '80px' }}
+      >
+        <Link to="/card/alex" className="ui header">Alex</Link>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris
+          pharetra malesuada ipsum, id ornare mauris varius vel. Interdum et
+          malesuada fames ac ante ipsum primis in faucibus. Suspendisse et
+          fringilla elit. Ut arcu tellus, venenatis luctus sapien vel, sodales
+          rhoncus libero. Pellentesque nec tempus libero. Nullam at dapibus
+          dolor, sit amet auctor leo. Vestibulum luctus faucibus pellentesque.
+          Nunc condimentum nunc quis sagittis ultrices. Proin ultricies vel
+          mauris ac gravida.
+        </p>
+      </div>
+      <div
+        className="ui raised very padded text container segment"
+        style={{ marginTop: '80px' }}
+      >
+        <Link to="/card/willma" className="ui header">Willma</Link>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris
+          pharetra malesuada ipsum, id ornare mauris varius vel. Interdum et
+          malesuada fames ac ante ipsum primis in faucibus. Suspendisse et
+          fringilla elit. Ut arcu tellus, venenatis luctus sapien vel, sodales
+          rhoncus libero. Pellentesque nec tempus libero. Nullam at dapibus
+          dolor, sit amet auctor leo. Vestibulum luctus faucibus pellentesque.
+          Nunc condimentum nunc quis sagittis ultrices. Proin ultricies vel
+          mauris ac gravida.
+        </p>
+      </div>
     </div>
   );
 };
