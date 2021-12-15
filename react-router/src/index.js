@@ -17,8 +17,10 @@ const store =
 we need to create a reducer and put into this store. for this i have create a 'reducers' folder in src  */
 
 ReactDOM.render(
-  <Provider store={store}> {/*  STEP 5 - now store pass to our APP */}
+  <Provider store={store}>
+    {' '}
+    {/*  STEP 6 - now store pass to our APP */}
     <App />
   </Provider>,
   document.getElementById('root')
-); 
+);
