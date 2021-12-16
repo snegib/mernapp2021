@@ -11,17 +11,17 @@ const Contact = ({ cards }) => {
   // }, 2000)
   // console.log(props)
 
-  console.log(cards);
+  console.log("contact ",cards);
 
   return (
     <div>
       {/* <Modal /> */}
-      {cards.map(card => {
+      {cards.map((card, i) => {
         return (
           <div 
             className="ui raised very padded text container segment"
             style={{ marginTop: '80px' }}
-            key={card.id}
+            key={i}
             
           >
             <Link to={`/${card.title}`} className="ui header">
