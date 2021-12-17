@@ -1,6 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { deleteCard } from '../actions/cardActions';
+import {
+  deleteCard,
+  fetchUsers,
+} from '../actions/cardActions'; /* STEP 25 call new action 'fetchUsers and connect this action to the reducer.*/
 
 class Card extends React.Component {
   constructor(props) {
@@ -15,6 +18,12 @@ class Card extends React.Component {
   //   this.setState({ user: user });
   // }
 
+  /* STEP 27 
+   So I'm going to call it inside the 'componentDidMount' lifecycle method. And I want to get data after the component mounted in dumb.  All right. So now we can reach that data inside of our reducers, so let's go back to the rootReducer.js.*/
+  componentDidMount() {
+    this.props.fetchUsers();
+  }
+
   onButtonClick = () => {
     let id = this.props.card.id;
     this.props.deleteCard(id);
@@ -24,25 +33,33 @@ class Card extends React.Component {
   };
 
   render() {
+    /* STEP 31  reach the users inside our component that we fetched from an API */
+    console.log('card render users ', this.props.users);
     console.log('card render ', this.props);
     // const { user } = this.state;
-    const { title, body } = this.props.card;
-    return (
-      <div
-        className="ui raised very padded text container segment"
-        style={{ marginTop: '80px' }}
-      >
-        <h3 className="ui header">{title}</h3>
-        <p>{body}</p>
-        {/* this button will call  'deleteCard' method at some point of time */}
-        <button
-          className="ui primary right floated button"
-          onClick={this.onButtonClick}
+    // const { title, body } = this.props.card;
+    /* STEP 32 
+    now we will  map users and show it to the content in the browser */
+    const { users } = this.props;
+    return users.map(user => {
+      return (
+        <div
+          className="ui raised very padded text container segment"
+          style={{ marginTop: '80px' }}
+          key={user.id}
         >
-          Delete
-        </button>
-      </div>
-    );
+          <h3 className="ui header">{user.name}</h3>
+          <p>{user.email}</p>
+          {/* this button will call  'deleteCard' method at some point of time */}
+          <button
+            className="ui primary right floated button"
+            onClick={this.onButtonClick}
+          >
+            Delete
+          </button>
+        </div>
+      );
+    });
   }
 }
 
@@ -64,6 +81,10 @@ const mapStateToProps = (state, ownProps) => {
         );
       }
     ),
+
+    /* STEP 30 
+    we add users, And this is going to be equal to state that users like so. Now we can reach the users that we fetched from an API inside of our component.*/
+    users: state.users,
   };
 };
 
@@ -86,7 +107,14 @@ But before we do that, we're going to need to take this (mapDispatchToProps) and
 const mapDispatchToProps = dispatch => {
   return {
     deleteCard: id => {
-      dispatch(deleteCard);
+      dispatch(deleteCard(id));
+    },
+    /* STEP 26
+    So then we need to mapDispatchToProps of our card component.  So whenever we call 'fetchUsers()' function, it's going to call 'FETCH_USERS' action and then this action creator is going to make a request to an API and then return us the data. Then we are dispatching that data to the reducer.
+
+    All right, so let's call this function.*/
+    fetchUsers: () => {
+      dispatch(fetchUsers());
     },
   };
 };

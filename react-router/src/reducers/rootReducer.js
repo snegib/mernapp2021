@@ -18,7 +18,10 @@ const initialState = {
       title: 'John',
       body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris pharetra',
     },
-  ],
+  ] /* STEP 28
+  So first of all, it's had the user's property to our store state.
+ */,
+  users: []
 };
 
 /* STEP 2 
@@ -52,6 +55,14 @@ Then we override the card's property with the new cards. see next line beneath i
         cards: newCard /* STEP  17
         So now we need to return a new object, which represents this new state.
         */,
+      };
+    /* STEP 29
+    And if the action type is fetch users, I'm going to return an object and this will be our store state.
+Then inside here, I will say case 'FETCH_USERS'. And if the action type is 'FETCH_USERS', I'm going to return an object and this will be our store state. (...state) this will give us all the properties inside the state object. (users: action.payload) Then I'm going to override users with whatever's coming in from the Jason API. So now let's go to the card.js again and see the users that we fetch from JSON API. */
+    case 'FETCH_USERS':
+      return {
+        ...state,
+        users: action.payload,
       };
 
     default:
