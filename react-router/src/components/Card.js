@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { deleteCard } from '../actions/cardActions';
 
 class Card extends React.Component {
   constructor(props) {
@@ -19,7 +20,7 @@ class Card extends React.Component {
     this.props.deleteCard(id);
     /* STEP 19
     as soon as card is deleted from the browser we get error message of title undefined, which is fine as the card is deleted. so immediately we will redirect to the contact page instead of showing blank page with error.  */
-    this.props.history.push('/contact')
+    this.props.history.push('/contact');
   };
 
   render() {
@@ -85,7 +86,7 @@ But before we do that, we're going to need to take this (mapDispatchToProps) and
 const mapDispatchToProps = dispatch => {
   return {
     deleteCard: id => {
-      dispatch({ type: 'DELETE_CARD', id: id });
+      dispatch(deleteCard);
     },
   };
 };
