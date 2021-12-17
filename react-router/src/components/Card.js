@@ -17,6 +17,9 @@ class Card extends React.Component {
   onButtonClick = () => {
     let id = this.props.card.id;
     this.props.deleteCard(id);
+    /* STEP 19
+    as soon as card is deleted from the browser we get error message of title undefined, which is fine as the card is deleted. so immediately we will redirect to the contact page instead of showing blank page with error.  */
+    this.props.history.push('/contact')
   };
 
   render() {
