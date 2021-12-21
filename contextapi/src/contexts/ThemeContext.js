@@ -47,7 +47,17 @@ and share between them.
     return (
       /* STEP 8
         So in our theme and context file, what we need to do is return a bit of GSX a template which is going to contain that theme context. And we'll call it provider tag.Provider is provided by the context itself.So untidy here we'll do a tag called 'ThemeContext.Provider' like so.*/
-      <ThemeContext.Provider></ThemeContext.Provider>
+      //   <ThemeContext.Provider></ThemeContext.Provider>
+      /* STEP 10 
+    So on the Provider tag <ThemeContext.Provider>, we also need to specify a value property, and this value property is going to take whatever data we want it to because it's going to be provided to the components that is in this wrap.
+    {...this.state} this spread operator takes all of the different properties inside the state. And that way, it will spread them out into the new object that we will provide inside this value props. OK, so this is a data that's going to be provided to the different components that is context provider tag wraps.
+    So we want this context provided to wrap these components 'Navbar' and 'TodoList'. So let's first use the context data inside these components. So that means I'm going to save this and import the theme context provider into App.js. And then surround these components.*/
+      <ThemeContext.Provider value={{ ...this.state }}>
+        {/* STEP 13 
+          it wraps two children 'Navbar' and 'TodoList' 
+          And then this context provider tag (<ThemeContext.Provide>) provides all the data inside this value props to its children, and that makes the children. These two things.*/}
+        {this.props.children}
+      </ThemeContext.Provider>
     );
   }
 }
