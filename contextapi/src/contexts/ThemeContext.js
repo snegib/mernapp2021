@@ -25,7 +25,7 @@ For this we are going to create another component, which will be a class compone
 And then inside that component, we're going to have some states and that state will be the data that
 we want to share between the different components.
  */
-class ThemeContextProvider extends React.cloneElement {
+class ThemeContextProvider extends React.Component {
   /* STEP 5
     inside here, this is where we want to state.
 And this is going to be shared data that we want to supply to the different component. 
@@ -55,7 +55,8 @@ and share between them.
       <ThemeContext.Provider value={{ ...this.state }}>
         {/* STEP 13 
           it wraps two children 'Navbar' and 'TodoList' 
-          And then this context provider tag (<ThemeContext.Provide>) provides all the data inside this value props to its children, and that makes the children. These two things.*/}
+          And then this context provider tag (<ThemeContext.Provide>) provides all the data inside this value props to its children, and that makes the children. These two things.
+          That's all. now you can check on browser, react component addon. you can see context and props there*/}
         {this.props.children}
       </ThemeContext.Provider>
     );
