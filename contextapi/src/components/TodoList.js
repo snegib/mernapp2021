@@ -21,7 +21,7 @@ class TodoList extends React.Component {
     console.log('context in TodoList render ', this.context);
     /* STEP 17
         restructuring data */
-    const { isDarkTheme, darkTheme, lightTheme, changeTheme } = this.context; /* Step 25  get changeTheme */
+    const { isDarkTheme, darkTheme, lightTheme, changeTheme } = this.context; /* Step 25  get changeTheme. Now from STEP 26, we can see multiple context data to create. check 'AuthContext.js'*/
     /* STEP 18
         consume now and after that check on browser and change the 'isDarkTheme' property false from react component addons and see the changes */
     const theme = isDarkTheme ? darkTheme : lightTheme;

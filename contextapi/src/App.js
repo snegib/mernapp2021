@@ -4,11 +4,18 @@ import TodoList from './components/TodoList';
 /* STEP 11 
 import ThemeContextProvider*/
 import ThemeContextProvider from './contexts/ThemeContext';
+/* STEP 27
+ import AuthContextProvider */
+import AuthContextProvider from './contexts/AuthContext';
 const App = () => {
   return (
     <div className="App">
       <div className="ui raised very padded text container segment">
-        {/* STEP 12 
+        {/* STEP 28
+        call other context provider 'AuthContextProvider' and wrap previous provider  'ThemeContextProvider' with it.
+         */}
+        <AuthContextProvider>
+          {/* STEP 12 
         create a new tag called 'ThemeContextProvider'
         and now, of course, nothing much is going to be happening. 
         Now, what we need to do is up here 
@@ -27,10 +34,11 @@ const App = () => {
 
         So inside the 'ThemeContextProvider' component, we can access 'Navbar' and the 'TodoList' components
         */}
-        <ThemeContextProvider>
-          <Navbar />
-          <TodoList />
-        </ThemeContextProvider>
+          <ThemeContextProvider>
+            <Navbar />
+            <TodoList />
+          </ThemeContextProvider>
+        </AuthContextProvider>
       </div>
     </div>
   );
