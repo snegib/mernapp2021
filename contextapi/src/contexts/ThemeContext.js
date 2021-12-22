@@ -44,6 +44,12 @@ and share between them.
       background: '#5c5c5c',
     },
   };
+
+  /* STEP 22
+  what if we want to change the data. suppose we want to toggle 'isDarkTheme' property. so from Navbar and TodoList we want toggle data so This file is the best place to use changeTheme() function and set callback to Navbar and TodoList component */
+  changeTheme = () => {
+    this.setState({ isDarkTheme: !this.state.isDarkTheme });
+  };
   render() {
     return (
       /* STEP 8
@@ -53,8 +59,12 @@ and share between them.
     So on the Provider tag <ThemeContext.Provider>, we also need to specify a value property, and this value property is going to take whatever data we want it to because it's going to be provided to the components that is in this wrap.
     {...this.state} this spread operator takes all of the different properties inside the state. And that way, it will spread them out into the new object that we will provide inside this value props. OK, so this is a data that's going to be provided to the different components that is context provider tag wraps.
     So we want this context provided to wrap these components 'Navbar' and 'TodoList'. So let's first use the context data inside these components. So that means I'm going to save this and import the theme context provider into App.js. And then surround these components.*/
-      <ThemeContext.Provider value={{ ...this.state }}>
+      <ThemeContext.Provider value={{ ...this.state, changeTheme: this.changeTheme }}>
+          {/* STEP 23
+          Add changeTheme inside Provider, So we should have access to this function inside any component which consumes this context (like here, Navbar & TodoList).
+           */}
         {/* STEP 13 
+        Below
           it wraps two children 'Navbar' and 'TodoList' 
           And then this context provider tag (<ThemeContext.Provide>) provides all the data inside this value props to its children, and that makes the children. These two things.
           That's all. now you can check on browser, react component addon. you can see context and props there*/}

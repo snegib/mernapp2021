@@ -21,7 +21,7 @@ class TodoList extends React.Component {
     console.log('context in TodoList render ', this.context);
     /* STEP 17
         restructuring data */
-    const { isDarkTheme, darkTheme, lightTheme } = this.context;
+    const { isDarkTheme, darkTheme, lightTheme, changeTheme } = this.context; /* Step 25  get changeTheme */
     /* STEP 18
         consume now and after that check on browser and change the 'isDarkTheme' property false from react component addons and see the changes */
     const theme = isDarkTheme ? darkTheme : lightTheme;
@@ -37,6 +37,9 @@ class TodoList extends React.Component {
         <p className="item">Overview</p>
         <p className="item">Contact</p>
         <p className="item">Support</p>
+        {/* STEP 24
+        Now, we will create a button here and when we click on it, we will call that function (themeChange())  */}
+        <button className='ui button primary' onClick={changeTheme}>change the theme</button>
       </div>
     );
   }
