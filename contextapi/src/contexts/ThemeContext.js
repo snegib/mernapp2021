@@ -8,7 +8,8 @@ So this is going to create a context for us, and it's going to be stored in this
 export const ThemeContext = createContext(); /*STEP 7 
 Above code
 NOTE: "this STEP is just for Theory, not done any code here"
-So when we create a context, we have to also create a provider, which is basically a tag that surrounds  whichever components(Navbar, TodoList) we want to be able to use that context inside. So we should provide the data to these components (Navbar, TodoList). */
+So when we create a context, we have to also create a provider, which is basically a tag that surrounds  whichever components(Navbar, TodoList) we want to be able to use that context inside. So we should provide the data to these components (Navbar, TodoList). 
+we also get the 'ThemeContext' here in this line*/
 /* STEP 9
 Above code
 NOTE: "this STEP is just for Theory, not done any code here"
