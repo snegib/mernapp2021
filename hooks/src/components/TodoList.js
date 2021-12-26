@@ -1,4 +1,5 @@
 import React, { useState } from 'react'; /* STEP 1 import useState */
+import AddNewTodo from './AddNewTodo'; /* STEP 8 import AddNewTodo */
 
 const TodoList = () => {
   /* STEP 2
@@ -33,12 +34,12 @@ restructuring is this (const [todos, setTodos]), to get these two different valu
   }, 
   we pass whatever value we want. So we want this data to be an array because we are mapping it in here. So we pass in an array and this is going to completely replace whatever the current value of todos is.So for that reason, we need to use the spread syntax like this. (...todos)
   */
-  const addTodo = () => {
-    console.log('hello');
+  const addTodo = text => {
+    // console.log(text);
     setTodos([
       ...todos /*  STEP 5
         And that way, we're going to get the current to dos and spread them into this array. So we're going to grab each one of these and put them into this new array */,
-      { text: 'Learn Hooks', id: Math.random() } /*  STEP 6 
+      { text: text, id: Math.random() } /*  STEP 6 
       and then we're going to want to add an additional to do in this new array. And that's going to be a new object*/,
     ]);
   };
@@ -50,7 +51,9 @@ restructuring is this (const [todos, setTodos]), to get these two different valu
           return <li key={todo.id}>{todo.text}</li>;
         })}
       </ul>
-      <button onClick={addTodo}>Add a todo</button>
+      {/* <button onClick={addTodo}>Add a todo</button> */}
+      {/* STEP 9 */}
+      <AddNewTodo addTodo={addTodo} />{/* STEP 10 pass addTodo function as callback */}
     </div>
   );
 };
