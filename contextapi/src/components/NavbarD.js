@@ -3,12 +3,23 @@ so one of the cool things about this use useContext, hook, is that we can use it
 now turn this as functional component. */
 import React, { useContext } from 'react';
 import { ThemeContext } from '../contexts/ThemeContext';
-import { AuthContext } from '../contexts/AuthContext';
+import { AuthContextD } from '../contexts/AuthContextD';
+
+console.log("NavbarD AuthContextD", AuthContextD);
 
 const NavbarD = () => {
   const { isDarkTheme, darkTheme, lightTheme } = useContext(ThemeContext);
-  const { isLoggedIn, changeAuthStatus } = useContext(AuthContext);
+  const { isLoggedIn, changeAuthStatus } = useContext(AuthContextD);
+
   const theme = isDarkTheme ? darkTheme : lightTheme;
+  console.log(
+    'ThemeContextD context in NavbarD render ',
+    useContext(ThemeContext)
+  );
+  console.log(
+    'AuthContextD context in NavbarD render ',
+    useContext(AuthContextD)
+  );
 
   return (
     <nav

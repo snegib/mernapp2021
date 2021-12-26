@@ -23,7 +23,10 @@ const TodolistD = () => {
   /* STEP 8 [useContext]   
     now you can add condition here*/
   const theme = isDarkTheme ? darkTheme : lightTheme;
-
+  console.log(
+    'ThemeContext context in TodoListD render ',
+    useContext(ThemeContext)
+  );
   return (
     <div
       style={{

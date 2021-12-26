@@ -1,12 +1,16 @@
 import React from 'react';
 import Navbar from './components/Navbar';
 import TodoList from './components/TodoList';
+import NavbarD from './components/NavbarD';
+import TodoListD from './components/TodoListD';
+
 /* STEP 11 
 import ThemeContextProvider*/
 import ThemeContextProvider from './contexts/ThemeContext';
 /* STEP 27
  import AuthContextProvider */
 import AuthContextProvider from './contexts/AuthContext';
+import AuthContextProviderD from './contexts/AuthContextD';
 const App = () => {
   return (
     <div className="App">
@@ -39,6 +43,13 @@ const App = () => {
             <TodoList />
           </ThemeContextProvider>
         </AuthContextProvider>
+        <AuthContextProviderD>
+          <ThemeContextProvider>
+            <div style={{ height: '100px', background: 'green' }}></div>
+            <NavbarD />
+            <TodoListD />
+          </ThemeContextProvider>
+        </AuthContextProviderD>
       </div>
     </div>
   );
