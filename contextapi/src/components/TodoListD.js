@@ -17,9 +17,11 @@ const TodoListD = () => {
 
   // useContext(ThemeContext)
 
-  const { todos, addTodo } =
+  const { todos, addTodo, removeTodo } =
     useContext(TodoListContext); /* STEP 4 [About setTodos function] 
   now we deconstruct 'addTodo' function here. Now we need to pass a parameter to this 'addTodo' function, which will be the new to do that we want to add. So to do that. We're going to create an input field add  to do button. So that way, we'll be able to type a new To-Do into the input field that we're going to create and then click on add to do but. That we will also create in a minute. Now, when we do that, we're going to get the new to do that gets typed into the input field. see the form below*/
+  /*  STEP 2 [About removeTodo function] 
+  now we deconstruct 'removeTodo' function here. */
   console.log('TodoListD todos ', todos, addTodo);
   /* STEP 7 [useContext]  
    now restructuring different properties from the context object */
@@ -50,6 +52,15 @@ const TodoListD = () => {
     e.preventDefault();
     addTodo(todo)
   };
+
+  /* STEP 4 [About removeTodo function]  
+  now create a call back */
+  const handleRemoveTodo= (e)=>{
+    const id = e.target.id
+    removeTodo(id)/*  STEP 6 [About removeTodo function]  
+    we pass id here*/
+
+  }
   return (
     <div
       style={{
@@ -61,7 +72,10 @@ const TodoListD = () => {
       {todos.length ? (
         todos.map(todo => {
           return (
-            <p key={todo.id} className="item">
+            /* STEP 3 [About removeTodo function]  
+            Now we need to attach onClick event to this <p> tag. Because each of these <p> tags represent each of these todos. So I'm going to say on Click. And inside here, I'm going to call a callback function, and I'm going to name it. 'handleRemoveTodo'*/
+            <p id={todo.id} onClick={handleRemoveTodo} key={todo.id} className="item">{/*  STEP 5 [About removeTodo function] 
+            let's add to id to this <p> */}
               {todo.text}
             </p>
           );
