@@ -20,7 +20,12 @@ const App = () => {
     <div className="App">
       <div className="ui raised very padded text container segment">
         <div
-          style={{ background: 'cyan', padding: '20px', marginBottom: '40px', textAlign: 'center' }}
+          style={{
+            background: 'cyan',
+            padding: '20px',
+            marginBottom: '40px',
+            textAlign: 'center',
+          }}
         >
           <h2
             style={{
@@ -28,10 +33,10 @@ const App = () => {
               padding: '20px',
               textAlign: 'center',
               fontWeight: 'bold',
-              color: 'yellow'
+              color: 'yellow',
             }}
           >
-           Previous with context API
+            Context API example
           </h2>
           {/* STEP 28
         call other context provider 'AuthContextProvider' and wrap previous provider  'ThemeContextProvider' with it.
@@ -57,14 +62,18 @@ const App = () => {
         So inside the 'ThemeContextProvider' component, we can access 'Navbar' and the 'TodoList' components
         */}
             <ThemeContextProvider>
-              
               <Navbar />
               <TodoList />
             </ThemeContextProvider>
           </AuthContextProvider>
         </div>
         <div
-          style={{ background: 'green', padding: '20px',  marginBottom: '40px', textAlign: 'center' }}
+          style={{
+            background: 'green',
+            padding: '20px',
+            marginBottom: '40px',
+            textAlign: 'center',
+          }}
         >
           <h2
             style={{
@@ -72,10 +81,10 @@ const App = () => {
               padding: '20px',
               textAlign: 'center',
               fontWeight: 'bold',
-              color: 'yellow'
+              color: 'yellow',
             }}
           >
-            New with use Hooks, useContext useState hooks
+            New with 'useContext' and 'useState' hooks
           </h2>
           <AuthContextProviderD>
             <TodoListContextProvider>
@@ -87,7 +96,12 @@ const App = () => {
           </AuthContextProviderD>
         </div>
         <div
-          style={{ background: 'yellow', padding: '20px',   marginBottom: '40px', textAlign: 'center' }}
+          style={{
+            background: 'yellow',
+            padding: '20px',
+            marginBottom: '40px',
+            textAlign: 'center',
+          }}
         >
           <h2
             style={{
@@ -95,10 +109,10 @@ const App = () => {
               padding: '20px',
               textAlign: 'center',
               fontWeight: 'bold',
-              color: 'yellow'
+              color: 'yellow',
             }}
           >
-            New with use useReducer hook
+            New with 'useReducer' hook
           </h2>
           <AuthContextProviderD>
             <TodoListContext_useReducerProvider>
