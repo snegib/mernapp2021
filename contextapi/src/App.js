@@ -12,7 +12,7 @@ import ThemeContextProvider from './contexts/ThemeContext';
 import AuthContextProvider from './contexts/AuthContext';
 import AuthContextProviderD from './contexts/AuthContextD';
 
-import TodoListContextProvider  from './contexts/TodoListContext';
+import TodoListContextProvider from './contexts/TodoListContext';
 const App = () => {
   return (
     <div className="App">
@@ -41,7 +41,7 @@ const App = () => {
         So inside the 'ThemeContextProvider' component, we can access 'Navbar' and the 'TodoList' components
         */}
           <ThemeContextProvider>
-            Hello
+            Previous with context API
             <Navbar />
             <TodoList />
           </ThemeContextProvider>
@@ -49,7 +49,7 @@ const App = () => {
         <AuthContextProviderD>
           <TodoListContextProvider>
             <ThemeContextProvider>
-              Hello
+              New with use Hooks, useContext useState hooks
               <div style={{ height: '100px', background: 'green' }}></div>
               <NavbarD />
               <TodoListD />
