@@ -6,16 +6,19 @@ And of course, we're going to see which usage of the context is cleaner and more
 import React, { useContext } from 'react'; /* STEP 2 [useContext]  
 import useContext */
 import { ThemeContext } from '../contexts/ThemeContext';
+import { TodoListContext } from '../contexts/TodoListContext';
 
 /* STEP 5 [useContext]  
 convert to functional component*/
-const TodolistD = () => {
+const TodoListD = () => {
   /* STEP 6 [useContext]  
   NOTE: this is for below commented line where we have written code 'useContext(ThemeContext)' 
     All I'm going to do is come down here and I'll say 'useContext()' and then pass in the context that we want to use inside this component. So we want to use 'ThemeContext' inside this component.And we imported that on the top 'import { ThemeContext } from '../contexts/ThemeContext';'. so copy and paste it here. useContext(ThemeContext). OK, so we are saying here that we want to use this context.And this is going to provide us with that context object with all of these different properties in it.*/
 
   // useContext(ThemeContext)
 
+  const { todos } = useContext(TodoListContext);
+  console.log('TodoListD todos ', todos);
   /* STEP 7 [useContext]  
    now restructuring different properties from the context object */
   const { isDarkTheme, darkTheme, lightTheme, changeTheme } =
@@ -36,9 +39,17 @@ const TodolistD = () => {
         textAlign: 'center',
       }}
     >
-      <p className="item">Overview</p>
-      <p className="item">Contact</p>
-      <p className="item">Support</p>
+      {todos.length ? (
+        todos.map(todo => {
+          return (
+            <p key={todo.id} className="item">
+              {todo.text}
+            </p>
+          );
+        })
+      ) : (
+        <div> you don't have todos </div>
+      )}{' '}
       <button className="ui button primary" onClick={changeTheme}>
         change the theme
       </button>
@@ -77,4 +88,4 @@ for using useContext hook, first of all we need to convert class component to fu
   }
 } */
 
-export default TodolistD;
+export default TodoListD;
