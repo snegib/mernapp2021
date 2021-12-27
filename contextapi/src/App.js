@@ -3,6 +3,7 @@ import Navbar from './components/Navbar';
 import TodoList from './components/TodoList';
 import NavbarD from './components/NavbarD';
 import TodoListD from './components/TodoListD';
+import TodoListUseReducer from './components/TodoList_useReducer';
 
 /* STEP 11 
 import ThemeContextProvider*/
@@ -13,15 +14,30 @@ import AuthContextProvider from './contexts/AuthContext';
 import AuthContextProviderD from './contexts/AuthContextD';
 
 import TodoListContextProvider from './contexts/TodoListContext';
+import TodoListContext_useReducerProvider from './contexts/TodoListContext_useReducer';
 const App = () => {
   return (
     <div className="App">
       <div className="ui raised very padded text container segment">
-        {/* STEP 28
+        <div
+          style={{ background: 'cyan', padding: '20px', marginBottom: '40px', textAlign: 'center' }}
+        >
+          <h2
+            style={{
+              background: 'brown',
+              padding: '20px',
+              textAlign: 'center',
+              fontWeight: 'bold',
+              color: 'yellow'
+            }}
+          >
+           Previous with context API
+          </h2>
+          {/* STEP 28
         call other context provider 'AuthContextProvider' and wrap previous provider  'ThemeContextProvider' with it.
          */}
-        <AuthContextProvider>
-          {/* STEP 12 
+          <AuthContextProvider>
+            {/* STEP 12 
         create a new tag called 'ThemeContextProvider'
         and now, of course, nothing much is going to be happening. 
         Now, what we need to do is up here 
@@ -40,22 +56,59 @@ const App = () => {
 
         So inside the 'ThemeContextProvider' component, we can access 'Navbar' and the 'TodoList' components
         */}
-          <ThemeContextProvider>
-            Previous with context API
-            <Navbar />
-            <TodoList />
-          </ThemeContextProvider>
-        </AuthContextProvider>
-        <AuthContextProviderD>
-          <TodoListContextProvider>
             <ThemeContextProvider>
-              New with use Hooks, useContext useState hooks
-              <div style={{ height: '100px', background: 'green' }}></div>
-              <NavbarD />
-              <TodoListD />
+              
+              <Navbar />
+              <TodoList />
             </ThemeContextProvider>
-          </TodoListContextProvider>
-        </AuthContextProviderD>
+          </AuthContextProvider>
+        </div>
+        <div
+          style={{ background: 'green', padding: '20px',  marginBottom: '40px', textAlign: 'center' }}
+        >
+          <h2
+            style={{
+              background: 'brown',
+              padding: '20px',
+              textAlign: 'center',
+              fontWeight: 'bold',
+              color: 'yellow'
+            }}
+          >
+            New with use Hooks, useContext useState hooks
+          </h2>
+          <AuthContextProviderD>
+            <TodoListContextProvider>
+              <ThemeContextProvider>
+                <NavbarD />
+                <TodoListD />
+              </ThemeContextProvider>
+            </TodoListContextProvider>
+          </AuthContextProviderD>
+        </div>
+        <div
+          style={{ background: 'yellow', padding: '20px',   marginBottom: '40px', textAlign: 'center' }}
+        >
+          <h2
+            style={{
+              background: 'brown',
+              padding: '20px',
+              textAlign: 'center',
+              fontWeight: 'bold',
+              color: 'yellow'
+            }}
+          >
+            New with use useReducer hook
+          </h2>
+          <AuthContextProviderD>
+            <TodoListContext_useReducerProvider>
+              <ThemeContextProvider>
+                <NavbarD />
+                <TodoListUseReducer />
+              </ThemeContextProvider>
+            </TodoListContext_useReducerProvider>
+          </AuthContextProviderD>
+        </div>
       </div>
     </div>
   );
