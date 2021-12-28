@@ -3,22 +3,9 @@ import React, {
   useReducer,
 } from 'react'; /* STEP 1 [useReducer hook use]  
 import useReducer hook*/
-
+import { todoReducer } from '../reducers/todoReducer';
 export const TodoListContext_useReducer = createContext();
 
-/* STEP 3 [useReducer hook use]   
-create todoReducer function */
-const todoReducer = (state, action) => {
-  switch (action.type) {
-    case 'ADD_TODO':
-      return [...state, { text: action.text, id: Math.random() }];
-    case 'REMOVE_TODO':
-      return state.filter(todo => todo.id !== Number(action.id));
-
-    default:
-      return state;
-  }
-};
 
 const TodoListContext_useReducerProvider = ({ children }) => {
   console.log('TodoListContext ', children);
@@ -73,3 +60,13 @@ const TodoListContext_useReducerProvider = ({ children }) => {
 };
 
 export default TodoListContext_useReducerProvider;
+
+/* Now, we're going to make a tiny change in our component structure. OK, so in general, we would create this reducer function under its own directory because if you look at this page, well, it doesn't seem so clean, right? Because we have both this 'todoReducer' function and this functional component in 'TodoListContext_useReducerProvider'. Now, at first glance, it might be a little confusing. Which one is the actual context and which one is reduce function? So to make it more clean, readable, I'm going to separate these two in here. And at the end, we're going to keep our context under the context directory and keep our reducer under the reducer directory. Now to do that, what I'm going to do is take this, reduce 'todoReducer' function and move it under the reducer directory. OK, so to do that, I'm going to create a new folder called 'reducers' under the 'src' directory.
+
+And put my producer inside here.
+
+Now, of course, you don't have to do this.
+
+I'm just showing you another way to keep things a little bit more organized here.
+
+I'm not going to change any functionality. */
