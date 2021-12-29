@@ -24,7 +24,8 @@ const server = http.createServer((req, res) => {
   const readStream2 = fs.createReadStream(__dirname + '/read-me2.txt');
   readStream2.pipe(
     res
-  ); /* read-me text in the browser.. run node app in terminal and see the result */
+  ); /* read-me text in the browser.. run node app in terminal and see the result.
+  instead of sending plain text to browser we can sent HTML to the browser for that we need to make 2 changes. first we need to change in header ['Content-Type': 'text/plain'] should be ['Content-Type': 'text/html'] and second is change file name [(__dirname + '/read-me2.txt')]  to [(__dirname + '/read-me2.html')] and ofcourse 'read-me2.html' file in the directory should have*/
 });
 console.log('port 3000');
 server.listen(3000, '127.0.0.1');
