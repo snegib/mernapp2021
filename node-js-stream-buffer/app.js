@@ -29,3 +29,19 @@ const server = http.createServer((req, res) => {
 });
 console.log('port 3000');
 server.listen(3000, '127.0.0.1');
+
+const serverJson = http.createServer((req, res) => {
+  res.writeHead(200, {
+    'Content-Type': 'application/json',
+  });
+  const person = {
+    name: 'suman',
+    email: 'suman@dfd.com',
+    job: 'designer',
+  };
+  res.end(
+    JSON.stringify(person)
+  ); /* this is how we send the data to client. this end methods need buffer or variable. so here we have person object and that object need to be serialization to turned into string and that sting have to be in json format. so will use JSON.stringify method*/
+});
+console.log('port 8000');
+serverJson.listen(8000, '127.0.0.1');
