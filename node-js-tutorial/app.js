@@ -2,9 +2,10 @@ const helper = require('./helper_multipleFunc');
 /* call core events module from build in nodejs */
 const util = require('util');
 const events = require('events');
-console.log(helper.user('Alex'));
-console.log(helper.id('123'));
-console.log(helper.email('Alex@.com'));
+const fs = require('fs');
+console.log('01 ', helper.user('Alex'));
+console.log('02 ', helper.id('123'));
+console.log('03 ', helper.email('Alex@.com'));
 
 /* 
 STEP 1 [custom event with event module]
@@ -27,7 +28,7 @@ And then the second one is the arguments or whatever we want to pass through int
 
 const myEmitter = new events.EventEmitter();
 myEmitter.on('test', function (arg) {
-  console.log(arg);
+  console.log('04 ', arg);
 });
 
 myEmitter.emit('test', 'Hello world');
@@ -54,7 +55,7 @@ That we want to inherit, and that is teams, so we want teams to inherit.
 The other thing we want to inherit, which is the events that event.Emitter.
 so, event.EventEmitter is going to inherit anything created using this team's constructor.*/
 
-util.inherits(teams, event.EventEmitter);
+util.inherits(teams, events.EventEmitter);
 const Narendra = new teams('Narendra');
 const Aarav = new teams('Aarav');
 const Suman = new teams('Suman');
@@ -72,10 +73,41 @@ So to attach an event listener to each team, I'm going to iterate this array. So
 
 teamArray.forEach(team => {
   team.on('nation', function (nation) {
-    console.log(team.name + ' is ' + nation + ' football club ');
+    console.log('05 ', team.name + ' is ' + nation + ' football club ');
   });
 });
 
 Narendra.emit('nation', 'English');
 Aarav.emit('nation', 'India');
 Suman.emit('nation', 'Italian');
+
+/* STEP 1 [Read file, synchronous Method]
+To read file we use readFileSync() method. first parameter is absolute file name and second parameter we need to pass through is the character encoding, because when we go out and read a file, we're dealing with binary data, which is just zeros and ones, right? and store the result in variable 'text'
+
+ */
+
+const text = fs.readFileSync('read-me.txt', 'utf-8');
+console.log('06 ', text);
+
+/* STEP 1 [Write file, synchronous Method]
+ */
+fs.writeFileSync('write.txt', text);
+
+/* STEP 1 [Read file, Asynchronous Method]
+To read file we use readFile() method. first parameter is absolute file name and second parameter we need to pass through is the character encoding, because when we go out and read a file, we're dealing with binary data, which is just zeros and ones, right? and store the result in variable 'text'. after that we're going to use a callback function to fire when the process is complete. this function takes two parameter, firs is error and second is data
+
+But now the best thing about this is we're not blocking the code while this is reading the read me file.
+check in console. Hi there is printing first before it read the file
+ */
+
+const text1 = fs.readFile('read-me.txt', 'utf-8', function (error, data) {
+  console.log('07 ', data);
+  /* STEP 1 [Write file, Asynchronous Method]
+   */
+  fs.writeFile('write.txt', data, function (error) {
+    if (error) {
+      console.log(error);
+    }
+  });
+});
+console.log('08 ', 'Hi there');
