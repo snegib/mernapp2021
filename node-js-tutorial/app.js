@@ -111,3 +111,48 @@ const text1 = fs.readFile('read-me.txt', 'utf-8', function (error, data) {
   });
 });
 console.log('08 ', 'Hi there');
+
+/*  STEP 1 [create directory, synchronous Method] */
+// fs.mkdirSync('my-folder');
+
+/*  STEP 1 [remove directory, synchronous Method]
+to run this you need to comment 'fs.mkdirSync('my-folder')'
+synchronous is block the further code */
+// fs.rmdirSync('my-folder');
+
+/*  STEP 1 [create directory, Asynchronous Method] 
+So now I'm going to make a directory asynchronously. So we're saying 'fs.mkdir' to make a directory.
+Now, remember, when we use asynchronous methods, we should use a callback function to do something
+once this action has been completed.So we can pass that callback function through here as a second parameter, and then we'll do something once it has created the directory.
+'fs.mkdir('my-folder', ()=>{ do something });'
+
+So now what I want to do is go ahead and read this read-me.txt file. Now, remember, we do need to say the UTF eight encoding. then, we fire a callback function once this is complete. So it takes in error.
+First, as the parameters and then the data we retrieve.
+'fs.readFile('read-me.txt', 'utf-8', (error, data) => { do something })
+
+All right, very cool. So first of all, we're making this my folder directory. Then one is complete. We're reading this file. And we're getting the data. So we can fire this callback function when it's finished reading the file. 
+
+And then I want to pass through data into a new file and create that file inside the my-folder directory.
+And this is going to write a file in this directory 
+'fs.writeFile('./my-folder/write-me.txt', data, () => {});'
+
+All right, so that is the asynchronous way to create a directory.
+*/
+fs.mkdir('my-folder', () => {
+  fs.readFile('read-me.txt', 'utf-8', (error, data) => {
+    fs.writeFile('./my-folder/write-me.txt', data, () => {});
+  });
+});
+
+// fs.unlink('./my-folder/write-me.txt', () => {});
+/*  STEP 1 [remove directory, Asynchronous Method] 
+we use this method but before that we need to remove the file inside it, like we have 'write-me.txt'
+so for this we need to use remove file by using 'fs.unlink' method
+fs.unlink('./my-folder/write-me.txt', () => {});
+so we need to wrap 'fs.rmdir' within 'fs.unlink'*/
+
+fs.unlink('./my-folder/write-me.txt', () => {
+  fs.rmdir('my-folder', error => {
+    console.log(error);
+  });
+});
