@@ -15,7 +15,7 @@ const StudentSchema = new Schema({
   studentNumber: Number,
   articleCount: Number,
   grade: Number,
-  article: [ArticleSchema],
+  articles: [ArticleSchema],
 });
 
 const Student = mongoose.model('student', StudentSchema);
