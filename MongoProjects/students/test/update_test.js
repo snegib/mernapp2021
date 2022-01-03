@@ -5,8 +5,8 @@ describe('delete the records ', () => {
   let suman;
   let suman2;
   beforeEach(done => {
-    suman = new Student({ name: 'Suman', studentNumber: 2500 , grade: 10});
-    suman2 = new Student({ name: 'Suman', studentNumber: 3500, grade : 10 });
+    suman = new Student({ name: 'Suman', studentNumber: 2500, grade: 10 });
+    suman2 = new Student({ name: 'Suman', studentNumber: 3500, grade: 10 });
     suman2.save();
     suman.save().then(() => done());
     console.log('update_test suman ', suman);
