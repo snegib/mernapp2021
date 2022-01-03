@@ -14,7 +14,7 @@ describe('delete the records ', () => {
     suman.save().then(() => done());
   });
 
-  it('update grades with operators', async () => {
+  xit('update grades with operators', async () => {
     const artCount = await Student.findOne({ name: 'Suman' });
     const student = await Student.updateOne(
       { name: 'Suman' },

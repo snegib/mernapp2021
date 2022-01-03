@@ -13,9 +13,14 @@ const StudentSchema = new Schema({
     },
   },
   studentNumber: Number,
-  articleCount: Number,
+  /*  articleCount: Number, // we make this virtual property */
   grade: Number,
   articles: [ArticleSchema],
+});
+
+StudentSchema.virtual('articleCount').get(function () {
+  console.log('Run the getter function');
+  return this.articles.length;
 });
 
 const Student = mongoose.model('student', StudentSchema);
