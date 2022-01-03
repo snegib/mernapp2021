@@ -1,3 +1,4 @@
+const { deleteOne } = require('../src/student');
 const mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost/students_test', {

@@ -6,16 +6,19 @@ so if we search by 'name' property then it might happen that there would be more
 const assert = require('assert');
 const Student = require('../src/student');
 
-describe('Read the data', done => {
+describe('Read the data', () => {
   /* STEP 2 
   So first, we have to be sure that we have a student named 'Suman' inside the collection to find any student. So for that, we'll need to add a 'beforeEach' statement inside the describe block. So the purpose is to insert a record into the students collection named 'Suman'. And that's the way that we're going to have some tests inside the file. So we all just make a new student by saying [Suman = new Student()].*/
 
   let suman;
+  let suman2;
   beforeEach(done => {
     suman = new Student({ name: 'Suman' });
-    suman.save().then(() => {
-      done();
-    });
+    suman2 = new Student({ name: 'Suman' });
+    suman.save();
+    suman2.save().then(() => done());
+    console.log('suman model ', suman);
+    console.log('suman2 model ', suman2);
   });
 
   /* STEP 3
@@ -24,11 +27,16 @@ describe('Read the data', done => {
   1=> Students.find(criteria) {returns and array}
   2=> Students.findOne(){returns single record}
    */
-  it('find all Suman', async () => {
+  /*   it('find all Suman', async () => {
     const students = await Student.find({ name: 'Suman' });
     console.log(students);
     assert(students[0]._id.toString() === suman._id.toString());
     console.log('students[0]._id ', students[0]._id);
     console.log('suman._id ', suman._id);
+  }); */
+  it('find one of the Suman', async () => {
+    const students = await Student.findOne({ _id: suman._id });
+    console.log(students);
+    assert(students.name === 'Suman');
   });
 });
