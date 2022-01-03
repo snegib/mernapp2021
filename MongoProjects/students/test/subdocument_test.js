@@ -14,8 +14,7 @@ describe('validation ', () => {
       });
     });
   }); */
-
-  it('Adding new record ', done => {
+  /* it('Adding new record ', done => {
     const suman = new Student({
       name: 'Suman',
       articles: [],
@@ -36,5 +35,30 @@ describe('validation ', () => {
           done();
         });
     });
+  }); */
+
+  it('Remove the record ', done => {
+    const suman = new Student({
+      name: 'Suman',
+      articles: [{ title: 'React Native' }],
+    });
+    suman
+      .save()
+      .then(() => {
+        Student.findOne({ name: 'Suman' });
+        done();
+      })
+      .then(Student => {
+        Student.articles[0].remove();
+        done();
+        return Student.save();
+      })
+      .then(() => {
+        Student.findOne({ name: 'Suman' });
+      })
+      .then(Student => {
+        assert(student.articles.length === 0);
+        done();
+      });
   });
 });
