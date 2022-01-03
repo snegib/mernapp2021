@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost/students_test', {
   useNewUrlParser: true,
+  useUnifiedTopology: true,
 });
 
 mongoose.connection
@@ -9,7 +10,7 @@ mongoose.connection
     console.log('we are connected');
   })
   .on('error', error => {
-    console.log('error occured ', error);
+    console.warn('error occurred ', error);
   });
 
 /*  beforeEach is a hook and it will run before each test, so it'll empty out our database and then run our test. Now, the challenging part here is that we've got to find our collection of students and drop all the records inside.  when Mongoose starts to reach out to Mangodb, it takes a little time to show the
