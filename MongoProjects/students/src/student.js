@@ -3,7 +3,10 @@ const Schema = mongoose.Schema;
 
 /* schema says what property we expect in a model */
 const StudentSchema = new Schema({
-  name: String,
+  name: {
+    type: String,
+    required: [true, 'Name is required']
+  },
   studentNumber: Number,
   articleCount: Number,
   grade: Number,
