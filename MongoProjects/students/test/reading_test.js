@@ -27,5 +27,8 @@ describe('Read the data', done => {
   it('find all Suman', async () => {
     const students = await Student.find({ name: 'Suman' });
     console.log(students);
+    assert(students[0]._id.toString() === suman._id.toString());
+    console.log('students[0]._id ', students[0]._id);
+    console.log('suman._id ', suman._id);
   });
 });
