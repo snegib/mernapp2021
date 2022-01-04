@@ -12,5 +12,20 @@ app.use(
   bodyParser.urlencoded({ limit: '32mb', extended: true })
 ); /*here, just setting up the body passer so that we can properly send our requests. */
 
+app.use(cors());
 
-app.use(cors())
+const CONNECTION_URL =
+  'mongodb+srv://suman:12345@cluster0.khqhx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+
+const PORT = process.env.PORT || 5000;
+
+mongoose
+  .connect(CONNECTION_URL) /* mongoose is to connect with out database */
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(`server running on  ${PORT}`);
+    });
+  })
+  .catch(err => {
+    console.log(err.message);
+  });
