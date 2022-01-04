@@ -25,4 +25,13 @@ This is the done call back. After the long running process is done. We'll call t
 beforeEach(done => {
   mongoose.connection.collections.students.drop();
   done();
+
+  // const { students, comments, articleBlogs } = mongoose.connection.collections;
+  // students.drop(() => {
+  //   comments.drop(() => {
+  //     articleBlogs.drop(() => {
+  //       done();
+  //     });
+  //   });
+  // });
 });
