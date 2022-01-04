@@ -28,8 +28,31 @@ describe('Association Test ', () => {
     Student.findOne({ name: 'Suman' })
       .populate('articleBlog')
       .then(student => {
-        // console.log(student.articleBlog[0]);
+        console.log(student.articleBlog[0]);
         assert(student.articleBlog[0].title === 'MongoDB');
+        done();
+      });
+  });
+
+  it.only('Nested Populate ', done => {
+    Student.findOne({ name: 'Suman' })
+      .populate({
+        path: 'articleBlog',
+        populate: {
+          path: 'comments',
+          model: 'comment',
+          populate: {
+            path: 'students',
+            model: 'student',
+          },
+        },
+      })
+      .then(student => {
+        console.log(student.articleBlog[0].comments[0]);
+        assert(student.name === 'Suman');
+        assert(student.articleBlog[0].title == 'MongoDB');
+        assert(student.articleBlog[0].comments[0].content === 'well done!');
+        assert(student.articleBlog[0].comments[0].students.name === 'Suman');
         done();
       });
   });
