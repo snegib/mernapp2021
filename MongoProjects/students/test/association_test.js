@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
-// const assert = require('assert');
+const assert = require('assert');
 const Student = require('../src/student');
 const Comment = require('../src/comment');
 const ArticleBlog = require('../src/articleBlog');
+const { populate } = require('../src/student');
 
 describe('Association Test ', () => {
   let suman, articleBlog, comment;
@@ -23,10 +24,13 @@ describe('Association Test ', () => {
     );
   });
 
-  it.only('Associate student with articleBlog', done => {
-    Student.findOne({ name: 'Suman' }).then(student => {
-      console.log(student);
-      done();
-    });
+  it('Associate student with articleBlog', done => {
+    Student.findOne({ name: 'Suman' })
+      .populate('articleBlog')
+      .then(student => {
+        // console.log(student.articleBlog[0]);
+        assert(student.articleBlog[0].title === 'MongoDB');
+        done();
+      });
   });
 });
