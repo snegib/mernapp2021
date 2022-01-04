@@ -15,7 +15,18 @@ describe('Association Test ', () => {
     comment = new Comment({ content: 'well done!' });
 
     suman.articleBlog.push(articleBlog);
-    articleBlog.comment.push(comment);
+    articleBlog.comments.push(comment);
     comment.students = suman; /* mongoose understand this is a reference */
+
+    Promise.all([suman.save(), articleBlog.save(), comment.save()]).then(() =>
+      done()
+    );
+  });
+
+  it.only('Associate student with articleBlog', done => {
+    Student.findOne({ name: 'Suman' }).then(student => {
+      console.log(student);
+      done();
+    });
   });
 });
