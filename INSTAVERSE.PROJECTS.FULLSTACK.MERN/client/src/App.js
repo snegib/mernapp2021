@@ -3,15 +3,17 @@ import { Container, AppBar, Typography, Grow, Grid } from '@material-ui/core';
 import instaverse from './images/instaverse.jpg';
 import Posts from './components/Posts/Posts';
 import Form from './components/Form/Form';
+import useStyles from './styles';
 
 const App = () => {
+  const classes = useStyles();
   return (
     <Container maxWidth="lg">
-      <AppBar position="static" color="inherit">
-        <Typography varient="h2" align="center">
+      <AppBar className={classes.appBar} position="static" color="inherit">
+        <Typography className={classes.heading} varient="h2" align="center">
           Instaverse
         </Typography>
-        <img src={instaverse} alt="instaverse" height="60" />
+        <img className={classes.image}  src={instaverse} alt="instaverse" height="60" />
       </AppBar>
       <Grow in>
         <Container>
