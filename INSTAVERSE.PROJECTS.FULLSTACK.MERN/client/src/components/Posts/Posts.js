@@ -6,6 +6,7 @@ import { Grid, CircularProgress } from '@material-ui/core';
 const Posts = () => {
   const classes = useStyles();
   const posts = useSelector(state => {
+    console.log('useSelector state ', state);
     return state.posts; /* state.posts is same which is inside 
       reducers=> index.js 
       export default combineReducers({

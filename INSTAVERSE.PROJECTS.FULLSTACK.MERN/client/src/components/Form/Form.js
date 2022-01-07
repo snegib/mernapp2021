@@ -5,8 +5,6 @@ import FileBase from 'react-file-base64';
 import { useDispatch } from 'react-redux';
 import { createPost } from '../../actions/posts';
 const Form = () => {
-  const classes = useStyles();
-  const dispatch = useDispatch();
   const [postData, setPostData] = useState({
     creator: '',
     title: '',
@@ -14,18 +12,21 @@ const Form = () => {
     tags: '',
     selectedFile: '',
   });
+
+  const classes = useStyles();
+  const dispatch = useDispatch();
   /* So once the user submits, we want to send over a post request with all the data that the user typed
 in. So first of all, we always have to say e.preventDefault(), not to get the refresh in the browser. And then in there, we're going to dispatch an action, so dispatch this time, it's going to be create
 post now inside of there, we're going to pass all the data from our state post data. So now we're making that request once we click the submit button.  Once the action is dispatched, then we go to reducers right there in the post reducer.*/
-const handleSubmit = (e) => {
-  e.preventDefault()
-    console.log('hello');
-    // dispatch(createPost({ ...postData, name: user?.result?.name }))
+  const handleSubmit = e => {
+    e.preventDefault();
+    console.log('hello postData ', postData);
+
     dispatch(createPost(postData));
   };
   const clear = () => {};
   return (
-    <Paper>
+    <Paper className={classes.paper}>
       <form
         autoComplete="off"
         noValidate
@@ -77,12 +78,10 @@ const handleSubmit = (e) => {
         <div className={classes.fileInput}>
           {/* we install 'npm install react-file-base64 --legecy-peer-deps' We'll use this to convert our images. */}
           <FileBase
-            type="file"
-            multiple={false}
-            onDone={({ base64 }) => {
-              setPostData({ ...postData, selectedFile: base64 });
-            }}
-          ></FileBase>
+                  type="file"
+                  multiple={false}
+                  onDone={({ base64 }) => setPostData({ ...postData, selectedFile: base64 })}
+               />
         </div>
         <Button
           className={classes.buttonSubmit}

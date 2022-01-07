@@ -17,13 +17,7 @@ const Post = ({ post }) => {
   const classes = useStyles();
   return (
     <Card className={classes.card}>
-      <CardMedia
-        className={classes.media}
-        image={post.selectedFile}
-        title={post.title}
-      >
-        {' '}
-      </CardMedia>
+      <CardMedia className={classes.media} image={post.selectedFile} title={post.title}> </CardMedia>
       <div className={classes.overlay}>
         <Typography variant="h6">{post.creator}</Typography>
         <Typography variant="body2">

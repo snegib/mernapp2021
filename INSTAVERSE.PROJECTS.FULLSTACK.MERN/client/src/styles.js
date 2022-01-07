@@ -16,6 +16,6 @@ export default makeStyles(() => ({
     textTransform: 'lowercase',
   },
   image: {
-    marginLeft: '15px',
+    margin: '15px',
   },
 }));
