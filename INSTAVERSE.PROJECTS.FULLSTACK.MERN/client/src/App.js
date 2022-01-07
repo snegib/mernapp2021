@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Container, AppBar, Typography, Grow, Grid } from '@material-ui/core';
-import { useDispatch, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import instaverse from './images/instaverse.jpg';
 import { getPosts } from './actions/posts';
 import Posts from './components/Posts/Posts';
@@ -31,7 +31,7 @@ const App = () => {
         <Container>
           <Grid
             container
-            justify="space-between"
+            justifyContent="space-between"
             alignItems="stretch"
             spacing={4}
           >

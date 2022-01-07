@@ -1,18 +1,20 @@
-import { applyMiddleware } from 'redux'
-import * from '../api'/* {*} means that we import everything from the actions as API, and that means we will be able to use this fetch posts like this api.fetchPost. */
+import { applyMiddleware } from 'redux';
+import * as api from '../components/api/index';
+/* {*} means that we import everything from the actions as API, and that means we will be able to use this fetch posts like this api.fetchPost. */
 
 /* //action creators
 Action creators are functions of return actions. */
-export const getPosts = async (dispatch)=>{
-    try{
-        const {data} = await api.fetchPosts()
-        dispatch({type: 'FETCH_ALL', payload: data })
-    }catch(error){
-
-    }
-    const action = {type: 'FETCH_ALL', payload: []}/* Payload is usually the data where we store all of our posts. */
-    dispatch(action)
-}
+export const getPosts = async dispatch => {
+  try {
+    const { data } = await api.fetchPosts();
+    dispatch({ type: 'FETCH_ALL', payload: data });
+  } catch (error) {}
+  const action = {
+    type: 'FETCH_ALL',
+    payload: [],
+  }; /* Payload is usually the data where we store all of our posts. */
+  dispatch(action);
+};
 
 /* So to just recap, let's go back action creators are functions that return in action, and action is just an object that has the type and a payload property.
 const getPosts = ()=>{
