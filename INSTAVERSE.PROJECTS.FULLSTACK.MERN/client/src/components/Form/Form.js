@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import useStyles from './styles';
 import { TextField, Button, Typography, Paper } from '@material-ui/core';
+import FileBase from 'react-file-base64';
 const Form = () => {
   const classes = useStyles();
   const [postData, setPostData] = useState({
@@ -58,9 +59,19 @@ const Form = () => {
         fullWidth
         value={postData.tags}
         onChange={e => {
-          setPostData({ ...postData, tags: e.target, value });
+          setPostData({ ...postData, tags: e.target.value });
         }}
       ></TextField>
+      <div className={classes.fileInput}>
+        {/* we install 'npm install react-file-base64 --legecy-peer-deps' We'll use this to convert our images. */}
+        <FileBase
+          type="file"
+          multiple={false}
+          onDone={({ base64 }) => {
+            setPostData({ ...postData, selectedFile: base64 });
+          }}
+        ></FileBase>
+      </div>
     </Paper>
   );
 };
