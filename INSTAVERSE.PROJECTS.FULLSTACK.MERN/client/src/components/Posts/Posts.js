@@ -14,7 +14,7 @@ const Posts = () => {
   }); /* Inside of the use selector, we're going to have a callback function.
   As a parameter in that callback function, we get access to that whole global redux store or state, and then we can immediately return state that posts. */
 
-  console.log(posts);
+  console.log('Posts component ', posts);
   return (
     <>
       <h1 className={classes.mainContainer}>Posts</h1>

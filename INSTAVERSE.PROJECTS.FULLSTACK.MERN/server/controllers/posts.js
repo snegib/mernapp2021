@@ -20,11 +20,11 @@ export const getPosts = async (req, res) => {
     const postMessages = await PostMessage.find();
     console.log(postMessages);
     /* if everything fine we will say res.status(200, which means everything went okey. and then we are going to return JSON which is going to simply be an array of all message that we have) */
-    res.status(200).json(postMessages);
+    return res.status(200).json(postMessages);
   } catch (error) {
-    res.status(404).json({ message: error.message });
+    return res.status(404).json({ message: error.message });
   }
-  res.send('Post works!');
+  // res.send('Post works!');
 };
 
 export const createPost = async (req, res) => {
@@ -35,8 +35,8 @@ export const createPost = async (req, res) => {
   const newPost = new PostMessage(body);
   try {
     await newPost.save();
-    res.status(201).json(newPost); /* https://httpstatus.com/ */
+    return res.status(201).json(newPost); /* https://httpstatus.com/ */
   } catch (error) {
-    res.status(409).json({ message: error.message });
+    return res.status(409).json({ message: error.message });
   }
 };

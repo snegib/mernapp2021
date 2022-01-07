@@ -1,5 +1,5 @@
-import { applyMiddleware } from 'redux';
 import * as api from '../components/api/index';
+// import * as api from '../api'
 /* {*} means that we import everything from the actions as API, and that means we will be able to use this fetch posts like this api.fetchPost. */
 
 /* //action creators
@@ -8,12 +8,14 @@ export const getPosts = async dispatch => {
   try {
     const { data } = await api.fetchPosts();
     dispatch({ type: 'FETCH_ALL', payload: data });
-  } catch (error) {}
-  const action = {
+  } catch (error) {
+    console.log(error.message);
+  }
+  /* const action = {
     type: 'FETCH_ALL',
     payload: [],
-  }; /* Payload is usually the data where we store all of our posts. */
-  dispatch(action);
+  }; //Payload is usually the data where we store all of our posts.
+  dispatch(action); */
 };
 
 /* So to just recap, let's go back action creators are functions that return in action, and action is just an object that has the type and a payload property.
@@ -48,3 +50,12 @@ we can immediately dispatch in action. Right. So and action is, as we said, an o
 So now we are successfully using Redux to actually pass or dispatch an action from the data from our
 back end.
 */
+
+export const createPost = post => async dispatch => {
+  try {
+    const { data } = await api.createPost(post);
+    dispatch({ type: 'CREATE', payload: data });
+  } catch (error) {
+    console.log(error);
+  }
+};
