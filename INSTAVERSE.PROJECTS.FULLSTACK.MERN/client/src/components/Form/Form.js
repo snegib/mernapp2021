@@ -27,10 +27,40 @@ const Form = () => {
         fullWidth
         value={postData.creator}
         onChange={e => {
-          setPostData({ ...postData, creator: e.target, value });
+          setPostData({ ...postData, creator: e.target.value });
         }}
       ></TextField>
       {/* What we actually have to do is first spread the postData. So that's ...postData And then we have a creator right there. That means that in every text field, if we do the same thing, but only change the last property. Well, that means all the data is going to persist while changing only this specific property of that specific text field. */}
+      <TextField
+        name="title"
+        variant="outlined"
+        label="Title"
+        fullWidth
+        value={postData.title}
+        onChange={e => {
+          setPostData({ ...postData, title: e.target.value });
+        }}
+      ></TextField>
+      <TextField
+        name="message"
+        variant="outlined"
+        label="Message"
+        fullWidth
+        value={postData.message}
+        onChange={e => {
+          setPostData({ ...postData, message: e.target.value });
+        }}
+      ></TextField>
+      <TextField
+        name="tags"
+        variant="outlined"
+        label="Tags"
+        fullWidth
+        value={postData.tags}
+        onChange={e => {
+          setPostData({ ...postData, tags: e.target, value });
+        }}
+      ></TextField>
     </Paper>
   );
 };
