@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Container, AppBar, Typography, Grow, Grid } from '@material-ui/core';
+import { Container, Grow, Grid } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
-import instaverse from './images/instaverse.jpg';
 import { getPosts } from './actions/posts';
 import Posts from './components/Posts/Posts';
 import Form from './components/Form/Form';
 import useStyles from './styles';
+import Navbar from './components/Navbar/Navbar';
 
 const App = () => {
   const classes = useStyles();
@@ -20,17 +20,7 @@ const App = () => {
   ]); /* 'currentId' is handling the  changes show in form submit without refreshing the page  */
   return (
     <Container maxWidth="lg">
-      <AppBar className={classes.appBar} position="static" color="inherit">
-        <Typography className={classes.heading} varient="h2" align="center">
-          Instaverse
-        </Typography>
-        <img
-          className={classes.image}
-          src={instaverse}
-          alt="instaverse"
-          height="60"
-        />
-      </AppBar>
+      <Navbar />
       <Grow in>
         <Container>
           <Grid
