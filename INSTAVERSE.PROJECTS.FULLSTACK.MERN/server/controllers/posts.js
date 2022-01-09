@@ -76,8 +76,7 @@ export const deletePost = async (req, res) => {
 export const likePost = async (req, res) => {
   const { id } = req.params;
   /* to check if id is valid */
-  const post = req.body;
-  if (!mongoose.Types.ObjectId.isValid(_id)) {
+  if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).send('No post with that ID');
   }
   const post = await PostMessage.findById(id);
