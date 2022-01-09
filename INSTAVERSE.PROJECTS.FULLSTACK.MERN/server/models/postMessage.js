@@ -5,7 +5,7 @@ const postSchema = mongoose.Schema({
   message: String,
   creator: String,
   tags: [String],
-  selecttedFile: String,
+  selectedFile: String,
   linkCount: {
     type: Number,
     default: 0,
