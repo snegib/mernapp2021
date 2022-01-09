@@ -21,10 +21,10 @@ app.use(
   '/posts',
   postRoutes
 ); /* Every routes inside the posRoutes reach by //localhost:5000/posts prefix routes. So 'posts' is prefixed word here */
-
-// const CONNECTION_URL =
-// 'mongodb+srv://suman:12345@cluster0.khqhx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
-
+/* 
+const CONNECTION_URL =
+  'mongodb+srv://suman:12345@cluster0.khqhx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+ */
 const PORT = process.env.PORT || 5000;
 
 mongoose
