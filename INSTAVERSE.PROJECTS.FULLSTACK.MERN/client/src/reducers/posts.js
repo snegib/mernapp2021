@@ -18,9 +18,29 @@ export default (posts = [], action) => {
     case 'DELETE':
       return posts.filter(post => {
         console.log('reducers DELETE payload ', post._id);
-        return post._id !== action.payload;
-      }); /* And in here we have a post and we're going to basically return all the posts, but we're going to filter out the one that we deleted it. */
+        return (
+          post._id !== action.payload
+        ); /* And in here we have a post and we're going to basically return all the posts, but we're going to filter out the one that we deleted it. */
+      });
+    case 'LIKE':
+      return posts.map(post => {
+        console.log('reducers UPDATE payload ', action.payload);
+        return post._id === action.payload._id ? action.payload : post;
+      });
+
     default:
       return posts;
   }
 };
+
+/* NOTE 
+since logic of UPDATE and LIKE actins are some so we can combine them by write like
+
+case 'UPDATE':
+ case 'LIKE':
+      return posts.map(post => {
+        console.log('reducers UPDATE payload ', action.payload);
+        return post._id === action.payload._id ? action.payload : post;
+      });
+
+*/

@@ -14,7 +14,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
-import { deletePost } from '../../../actions/posts';
+import { deletePost, likePost } from '../../../actions/posts';
 const Post = ({ post, setCurrentId }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -60,7 +60,13 @@ const Post = ({ post, setCurrentId }) => {
         </Typography>
       </CardContent>
       <CardActions className={classes.cardActions}>
-        <Button color="primary" size="small" onClick={() => {}}>
+        <Button
+          color="primary"
+          size="small"
+          onClick={() => {
+            dispatch(likeCount(post._id));
+          }}
+        >
           <ThumbUpAltIcon fontSize="small">
             &nbsp; Like &nbsp;
             {post.likeCount}
@@ -73,7 +79,7 @@ const Post = ({ post, setCurrentId }) => {
             dispatch(deletePost(post._id));
           }}
         >
-          <DeleteIcon fontSize="small">Delete {post.likeCount}</DeleteIcon>
+          <DeleteIcon fontSize="small">Delete</DeleteIcon>
         </Button>
       </CardActions>
     </Card>
@@ -81,3 +87,7 @@ const Post = ({ post, setCurrentId }) => {
 };
 
 export default Post;
+
+/* NOTE 
+
+So till now, one user can like a post as many times as they want. So if you want to give users the ability to like the post only once per account, well, we have to implement accounts. Well, it means it will just need the full authentication system. We need registration. We need to log in. We need to allow users to reset their passwords, create accounts and do everything else.That's usually the whole thing. The whole package is called authentication. So we're going to add authentication to this project and make it more complete.*/
