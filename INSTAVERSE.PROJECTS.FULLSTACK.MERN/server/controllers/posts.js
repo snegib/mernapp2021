@@ -72,3 +72,23 @@ export const deletePost = async (req, res) => {
 
   res.json({ message: 'post deleted successfully.' });
 };
+
+export const likePost = async (req, res) => {
+  const { id } = req.params;
+  /* to check if id is valid */
+  const post = req.body;
+  if (!mongoose.Types.ObjectId.isValid(_id)) {
+    return res.status(404).send('No post with that ID');
+  }
+  const post = await PostMessage.findById(id);
+  const updatedPost = await PostMessage.findByIdAndUpdate(
+    id,
+    { likeCount: post.likeCount + 1 },
+    { new: true }
+  ); /* As a second parameter, we want to pass in our updates, so that's going to be an object. In there, we want to incriminate the likeCount. So we're going to set likeCount to be equal to  post.likeCount. So this post is the post that we're fetching right here, and then what we simply do is increment by one.
+  
+  Then with update request, we have to specify the third parameter where we say that { new: true }
+ */
+
+  res.json(updatePost);
+};
