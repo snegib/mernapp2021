@@ -14,7 +14,10 @@ const App = () => {
 
   useEffect(() => {
     dispatch(getPosts);
-  }, [dispatch]);
+  }, [
+    currentId,
+    dispatch,
+  ]); /* 'currentId' is handling the  changes show in form submit without refreshing the page  */
   return (
     <Container maxWidth="lg">
       <AppBar className={classes.appBar} position="static" color="inherit">

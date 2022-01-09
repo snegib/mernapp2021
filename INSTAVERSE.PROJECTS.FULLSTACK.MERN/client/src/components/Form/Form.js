@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import useStyles from './styles';
 import { TextField, Button, Typography, Paper } from '@material-ui/core';
 import FileBase from 'react-file-base64';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { createPost, updatePost } from '../../actions/posts';
+
 const Form = ({ currentId, setCurrentId }) => {
   const [postData, setPostData] = useState({
     creator: '',
@@ -13,8 +14,22 @@ const Form = ({ currentId, setCurrentId }) => {
     selectedFile: '',
   });
 
+  const post = useSelector(state =>
+    currentId ? state.posts.find(p => p._id === currentId) : null
+  ); /* Also now we're fetching all the posts, 
+  const posts = useSelector(state => state.posts) 
+  but in this case, we don't want all the posts. We only want the data for the updated post. Right, so to do that in here, we're not going to return all the post, what we are going to do is we're going to have another ternary and that ternary is going to say if we have a currentId.
+  So if it's not now, then we want to loop over state.posts and we want to call a find method on them. More specifically, we want to find the post, right? So let's call it P in this case. That has the same ID  p._id === currentId, as our current ID, So this is going to make sure that we absolutely find only that specific post if we don't have the currentId, though in that case we just want to have 'null'. And now we're not returning post here. It's going to simply be post because the find method is returning one singular thing. */
+
   const classes = useStyles();
   const dispatch = useDispatch();
+
+  /* So it's in here, we say when this callback function should be run and what changes. Well.When the post value changes from nothing to the actual post and we want to run this function, then in here we're going to say if post exists, then we're going to setPostData(post). And remember, that's our state field here, setPostData, and we are simply going to populate it
+   useEffect(() => {  }, [post]);
+   with the data of the post. And that's it. */
+  useEffect(() => {
+    if (post) setPostData(post);
+  }, [post]);
   /* So once the user submits, we want to send over a post request with all the data that the user typed
 in. So first of all, we always have to say e.preventDefault(), not to get the refresh in the browser. And then in there, we're going to dispatch an action, so dispatch this time, it's going to be create
 post now inside of there, we're going to pass all the data from our state post data. So now we're making that request once we click the submit button.  Once the action is dispatched, then we go to reducers right there in the post reducer.*/
@@ -27,8 +42,18 @@ post now inside of there, we're going to pass all the data from our state post d
     } else {
       dispatch(createPost(postData));
     }
+    clear();
   };
-  const clear = () => {};
+  const clear = () => {
+    setCurrentId(null);
+    setPostData({
+      creator: '',
+      title: '',
+      message: '',
+      tags: '',
+      selectedFile: '',
+    });
+  };
   return (
     <Paper className={classes.paper}>
       <form
@@ -37,7 +62,9 @@ post now inside of there, we're going to pass all the data from our state post d
         className={`${classes.root} ${classes.form}`}
         onSubmit={handleSubmit}
       >
-        <Typography variant="h6">Creating a Post</Typography>
+        <Typography variant="h6">
+          {currentId ? 'Editing' : 'Createing'} a Post
+        </Typography>
         <TextField
           name="creator"
           variant="outlined"
