@@ -7,6 +7,7 @@ Action creators are functions of return actions. */
 export const getPosts = async dispatch => {
   try {
     const { data } = await api.fetchPosts();
+    console.log('actions getPosts ', data);
     dispatch({ type: 'FETCH_ALL', payload: data });
   } catch (error) {
     console.log(error.message);
@@ -54,8 +55,19 @@ back end.
 export const createPost = post => async dispatch => {
   try {
     const { data } = await api.createPost(post);
-    console.log('actions posts ', data);
+    console.log('actions createPost ', data);
     dispatch({ type: 'CREATE', payload: data });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
+export const updatePost = (id, post) => async dispatch => {
+  try {
+    const { data } = await api.updatePost(id, post);
+    console.log('actions updatePost ', data);
+    dispatch({ type: 'UPDATE', payload: data });
   } catch (error) {
     console.log(error);
   }

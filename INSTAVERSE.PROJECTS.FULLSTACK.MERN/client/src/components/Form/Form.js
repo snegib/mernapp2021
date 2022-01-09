@@ -3,7 +3,7 @@ import useStyles from './styles';
 import { TextField, Button, Typography, Paper } from '@material-ui/core';
 import FileBase from 'react-file-base64';
 import { useDispatch } from 'react-redux';
-import { createPost } from '../../actions/posts';
+import { createPost, updatePost } from '../../actions/posts';
 const Form = () => {
   const [postData, setPostData] = useState({
     creator: '',
@@ -21,8 +21,12 @@ post now inside of there, we're going to pass all the data from our state post d
   const handleSubmit = e => {
     e.preventDefault();
     console.log('hello postData ', postData);
-
-    dispatch(createPost(postData));
+    /* If we have a currentId, which means that if the currentId is not known. Then we're not going to dispatch a createPost. We are going to dispatch something different. And that's something different is going to be this time updatePost. But keep in mind with updatePost, we need to also know the ID.. So the postData is going to be the second parameter, first parameter is going to be the currentId. And else we're going to dispatch a createPost. So if we don't have a currently selected ID., that must mean that we are creating a post and not updating it. */
+    if (currentId) {
+      dispatch(updatePost(currentId, postData));
+    } else {
+      dispatch(createPost(postData));
+    }
   };
   const clear = () => {};
   return (
@@ -78,10 +82,12 @@ post now inside of there, we're going to pass all the data from our state post d
         <div className={classes.fileInput}>
           {/* we install 'npm install react-file-base64 --legecy-peer-deps' We'll use this to convert our images. */}
           <FileBase
-                  type="file"
-                  multiple={false}
-                  onDone={({ base64 }) => setPostData({ ...postData, selectedFile: base64 })}
-               />
+            type="file"
+            multiple={false}
+            onDone={({ base64 }) =>
+              setPostData({ ...postData, selectedFile: base64 })
+            }
+          />
         </div>
         <Button
           className={classes.buttonSubmit}
