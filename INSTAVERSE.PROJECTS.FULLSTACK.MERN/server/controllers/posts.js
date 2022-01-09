@@ -51,7 +51,7 @@ export const updatePost = async (req, res) => {
     /* Here we're going to do one simple check to see if _id is really a mongoose object ID. So to do that first, we have to import Mongoose from Mongoose and then check if it's not valid (!mongoose.Types.ObjectId.isValid(_id))*/
     return res.status(404).send('No post with that ID');
   }
-  /* else if the ID is there then we do update */
+  /* else if the ID is there then we do update or id is valid*/
   /* We're going to call our model, which is the post message, and then we're going to call a method called 'findByIdAndUpdate'. So there we need to pass the _id as the first parameter. here's a second parameter or the argument we have to pass the whole updated 'post', where are we receiving the data for the updates? Well, we are receiving it from the req.body. That is going to be sent from the front end. Now in here, we can pass that post, and finally, we have to specify new to be equal to true. So that we can actually receive the updated version of that post.*/
   const updatePost = await PostMessage.findByIdAndUpdate(_id, post, {
     new: true,
@@ -59,4 +59,16 @@ export const updatePost = async (req, res) => {
 
   /* so now we have access to the updatePost, and it also is going to be updated in the database. And finally, we can do res.json and we can send over that updated post. So that's going to be it for the update route and the controller. */
   res.json(updatePost);
+};
+
+export const deletePost = async (req, res) => {
+  const { id } = req.params;
+  /* to check if id is valid */
+  const post = req.body;
+  if (!mongoose.Types.ObjectId.isValid(_id)) {
+    return res.status(404).send('No post with that ID');
+  }
+  await PostMessage.findByIdAndRemove(id);
+
+  res.json({ message: 'post deleted successfully.' });
 };
