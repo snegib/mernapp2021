@@ -1,4 +1,11 @@
 import * as api from '../components/api/index';
+import {
+  FETCH_ALL,
+  DELETE,
+  UPDATE,
+  CREATE,
+  LIKE,
+} from '../constants/actionTypes';
 // import * as api from '../api'
 /* {*} means that we import everything from the actions as API, and that means we will be able to use this fetch posts like this api.fetchPost. */
 
@@ -8,7 +15,7 @@ export const getPosts = async dispatch => {
   try {
     const { data } = await api.fetchPosts();
     console.log('actions getPosts ', data);
-    dispatch({ type: 'FETCH_ALL', payload: data });
+    dispatch({ type: FETCH_ALL, payload: data });
   } catch (error) {
     console.log(error.message);
   }
@@ -56,7 +63,7 @@ export const createPost = post => async dispatch => {
   try {
     const { data } = await api.createPost(post);
     console.log('actions createPost ', data);
-    dispatch({ type: 'CREATE', payload: data });
+    dispatch({ type: CREATE, payload: data });
   } catch (error) {
     console.log(error);
   }
@@ -66,7 +73,7 @@ export const updatePost = (id, post) => async dispatch => {
   try {
     const { data } = await api.updatePost(id, post);
     console.log('actions updatePost ', data);
-    dispatch({ type: 'UPDATE', payload: data });
+    dispatch({ type: UPDATE, payload: data });
   } catch (error) {
     console.log(error);
   }
@@ -76,7 +83,7 @@ export const deletePost = id => async dispatch => {
   try {
     await api.deletePost(id);
     console.log('actions deletePost ', id);
-    dispatch({ type: 'DELETE', payload: id });
+    dispatch({ type: DELETE, payload: id });
   } catch (error) {
     console.log(error);
   }
@@ -86,7 +93,7 @@ export const likePost = (id, post) => async dispatch => {
   try {
     const { data } = await api.likePost(id);
     console.log('actions likePost ', data);
-    dispatch({ type: 'LIKE', payload: data });
+    dispatch({ type: LIKE, payload: data });
   } catch (error) {
     console.log(error);
   }
