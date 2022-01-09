@@ -7,7 +7,7 @@ import Posts from './components/Posts/Posts';
 import Form from './components/Form/Form';
 import useStyles from './styles';
 
-const App = ({currentId, setCurrentId}) => {
+const App = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [currentId, setCurrentId] = useState(null);

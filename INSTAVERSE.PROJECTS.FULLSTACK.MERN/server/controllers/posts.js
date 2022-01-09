@@ -2,7 +2,7 @@
 
 /* we are going to import PostMessage  so that we can access real model schema access*/
 import PostMessage from '../models/postMessage.js';
-import { Mongoose } from 'mongoose';
+import mongoose from 'mongoose';
 
 export const getPosts = async (req, res) => {
   /* each call back function is going to have try and catch block   
