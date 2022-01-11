@@ -42,7 +42,7 @@ export const Navbar = () => {
             <Button
               variant="contained"
               className={classes.logout}
-            //   onClick={logout}
+              //   onClick={logout}
               color="secondary"
             >
               Logout
