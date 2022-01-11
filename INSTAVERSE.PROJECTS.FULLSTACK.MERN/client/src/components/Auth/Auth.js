@@ -11,9 +11,13 @@ import useStyles from './styles';
 import LockOutlinedIcon from '@material-ui/icons/LockOpenOutlined';
 import Input from './Input';
 // import { useHistory } from 'react-router-dom';
-// import { signin, signup } from '../../actions/auth';
+/* useHistory is replaced with useNavigate */
+import { useNavigate } from 'react-router-dom';
+
+import { signin, signup } from '../../actions/auth';
 import { useDispatch } from 'react-redux';
 
+/* STEP 2 Registration with web Token */
 const initialState = {
   firstName: '',
   lastName: '',
@@ -24,23 +28,28 @@ const initialState = {
 
 const Auth = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [formData, setFormData] = useState(initialState);
+  const [formData, setFormData] =
+    useState(initialState); /* STEP 1 Registration with web Token */
   const [isSignup, setIsSignup] = useState(false);
   const classes = useStyles();
-  // const history = useHistory();
+  const navigate  = useNavigate();
   const dispatch = useDispatch();
 
+  /* STEP 3 Registration with web Token */
   const handleSubmit = e => {
     e.preventDefault();
 
+    /* STEP 4 Registration with web Token 
+      logic ofr signup or signin*/
     if (isSignup) {
-      // dispatch(signup(formData, history));
+      dispatch(signup(formData, navigate));
     } else {
-      // dispatch(signin(formData, history));
+      dispatch(signin(formData, navigate));
     }
-    // console.log(formData, history);
+    console.log(formData, navigate);
   };
 
+  /* STEP 4 Registration with web Token */
   const handleChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };

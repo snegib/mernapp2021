@@ -1,4 +1,4 @@
-import * as api from '../components/api/index';
+import * as api from '../api/index';
 import {
   FETCH_ALL,
   DELETE,
