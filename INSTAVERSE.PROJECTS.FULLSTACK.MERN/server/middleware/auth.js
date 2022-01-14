@@ -7,9 +7,10 @@ but all middleware, has something known as next. So that means do something and 
 const auth = async (req, res, next) => {
   try {
     /* All right, so after the user is signed up or signed in, they get this specific token. Now, when they want to do something like they'll be delete a post or like a post. Well, we have to check if this token is valid and that's what we're doing with this right here. */
+    console.log('middleware req header ', req.headers);
     const token =
       req.headers.authorization.split(
-        ''
+        ' '
       )[1]; /* So we split it, and we only want the token itself, and the token is on the first position in the array after we split it. */
 
     /* if the token exist */
@@ -29,7 +30,7 @@ const auth = async (req, res, next) => {
     console.log(error);
   }
 };
-
+export default auth;
 /*NOTE Now, the question might become, where do we use that off middleware?
 
 Well, the answer is in the 'routes'. 

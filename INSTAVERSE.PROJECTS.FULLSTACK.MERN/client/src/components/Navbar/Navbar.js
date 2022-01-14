@@ -1,12 +1,27 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { AppBar, Avatar, Typography, Toolbar, Button } from '@material-ui/core';
 import useStyles from './styles';
 import instaverse from '../../images/instaverse.jpg';
+import { useDispatch } from 'react-redux';
 
 export const Navbar = () => {
   const classes = useStyles();
-  const user = null;
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const logout = () => {
+    dispatch({ type: 'LOGOUT' });
+    navigate.push('/auth');
+    setUser(null);
+  };
+  useEffect(() => {
+    const token = user?.token;
+    //JWT
+    setUser(JSON.parse(localStorage.getItem('profile')));
+  }, [location]);
+
   return (
     <AppBar className={classes.appBar} position="static" color="inherit">
       <div className={classes.brandContainer}>
@@ -42,7 +57,7 @@ export const Navbar = () => {
             <Button
               variant="contained"
               className={classes.logout}
-              //   onClick={logout}
+              onClick={logout}
               color="secondary"
             >
               Logout

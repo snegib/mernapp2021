@@ -75,16 +75,32 @@ export const deletePost = async (req, res) => {
 
 export const likePost = async (req, res) => {
   const { id } = req.params;
+
+  /* if user is not authenticated */
+  if (!req.userId) return res.json({ message: 'Unauthenticated' });
   /* to check if id is valid */
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).send('No post with that ID');
   }
   const post = await PostMessage.findById(id);
-  const updatedPost = await PostMessage.findByIdAndUpdate(
-    id,
-    { likeCount: post.likeCount + 1 },
-    { new: true }
-  ); /* As a second parameter, we want to pass in our updates, so that's going to be an object. In there, we want to incriminate the likeCount. So we're going to set likeCount to be equal to  post.likeCount. So this post is the post that we're fetching right here, and then what we simply do is increment by one.
+  /* And we got the actual post, and now we have to see if the user's ID is already in the like section or if it is not. So that means we can say here, ' const index = post.likes.findIndex' And inside of here, we have a callback function where we loop through all the IDs. 'findIndex((id)=> id);' So each like is going to be the I.D. from a specific person. So that's that's really how we're going to know who liked what specific post. So what we have to do is convert the user I.D. to a string. Then we can say if the 'findIndex(id => id === String(req.userId))'. If that is the case. It means that their user IDs are already in there, and that means that the personnel already like the post. And this is going to be a dislike and not like your post. So how do we do that? ' if(index === -1)'.*/
+  const index = post.likes.findIndex(
+    id => id === String(req.userId)
+  ); /* person already like the post */
+  /* So how do we do that?
+  Well, we can say if if(index === -1). Only if their I.D. is not in here.Only then is this going to be equal to minus one. So this is if they want to like the post. Else we're going to get the index of the specific. In that case, we want to delete their like or rather dislike that post.*/
+  if (index === -1) {
+    //like post
+    post.likes.push(req.userId);
+  } else {
+    // delete post
+    post.likes = post.likes.filter(id => id !== String(req.userId));
+  }
+
+  /* All right, so now that we have the current number of likes, we are going to create the updated post,  in this case, We're simply going to create a new post. So the post we had, we're going to update it because now we have the same old post that now includes a like.  But one more thing that we have to do is add the actual likes to each post. That is going to be in the model => postMessage.js.*/
+  const updatedPost = await PostMessage.findByIdAndUpdate(id, post, {
+    new: true,
+  }); /* As a second parameter, we want to pass in our updates, so that's going to be an object. In there, we want to incriminate the likeCount. So we're going to set likeCount to be equal to  post.likeCount. So this post is the post that we're fetching right here, and then what we simply do is increment by one.
   
   Then with update request, we have to specify the third parameter where we say that { new: true }
  */

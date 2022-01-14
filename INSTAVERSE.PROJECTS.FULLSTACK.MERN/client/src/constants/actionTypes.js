@@ -5,3 +5,4 @@ export const FETCH_ALL = 'FETCH_ALL';
 export const LIKE =
   'LIKE'; /* like action is same as UPDATE so we can use UPDATE action whereas we are using LIKE action */
 export const AUTH = 'AUTH';
+export const LOGOUT = 'LOGOUT';

@@ -6,9 +6,10 @@ const postSchema = mongoose.Schema({
   creator: String,
   tags: [String],
   selectedFile: String,
-  linkCount: {
-    type: Number,
-    default: 0,
+  like: {
+    /* So far, what we had was the like count. We no longer have the like count. We are going to have likes, so the array of likes inside of there, the tape is actually going to be an array of strings. And this is how we write that. So the array of IDs and then the default value is going to be an empty array. We are going to have likes, so the array of likes inside of there, the type is actually going to be  an array of strings. And this is how we write that. So the array of IDs and then the default value is going to be an empty array.*/
+    type: [String],
+    default: [],
   },
   createdAt: {
     type: Date,
