@@ -1,6 +1,6 @@
-import express from 'express';
+import { Router } from 'express';
 import { signin, signup } from '../controllers/user.js';
-const router = express.Router();
+const router = Router();
 
 /* //localhost:5000 */
 router.post('/signin', signin);
