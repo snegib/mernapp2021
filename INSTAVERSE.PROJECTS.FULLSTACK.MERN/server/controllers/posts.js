@@ -33,7 +33,13 @@ export const createPost = async (req, res) => {
   const body = req.body;
 
   /* then we need to create a new post. and then pass the values that we are receiving from  the body  */
-  const newPost = new PostMessage(body);
+  // const newPost = new PostMessage(body);
+  /*  now destructure body*/
+  const newPost = new PostMessage({
+    ...post,
+    creator: req.userId,
+    createdAt: new Date().toISOString(),
+  });
   try {
     await newPost.save();
     return res.status(201).json(newPost); /* https://httpstatus.com/ */
