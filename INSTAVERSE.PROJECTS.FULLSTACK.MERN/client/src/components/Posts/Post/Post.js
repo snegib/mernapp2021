@@ -62,17 +62,21 @@ const Post = ({ post, setCurrentId }) => {
         </Typography>
       </div>
 
-      <div className={classes.overlay2}>
-        <Button
-          style={{ color: 'white' }}
-          size="small"
-          onClick={() => {
-            setCurrentId(post._id);
-          }}
-        >
-          <MoreHorizIcon fontSize="medium" />
-        </Button>
-      </div>
+      {/* And this is also going to make the button for the edit. So it's going to show up only if the creators currently either logged in user. */}
+      {user?.result?._id === post?.creator && (
+        <div className={classes.overlay2}>
+          <Button
+            style={{ color: 'white' }}
+            size="small"
+            onClick={() => {
+              setCurrentId(post._id);
+            }}
+          >
+            <MoreHorizIcon fontSize="medium" />
+          </Button>
+        </div>
+      )}
+
       <div className={classes.details}>
         <Typography variant="body2" color="textSecondary">
           {post.tags.map(tag => `#${tag} `)}
@@ -98,15 +102,18 @@ const Post = ({ post, setCurrentId }) => {
         >
           <Likes />
         </Button>
-        <Button
-          color="primary"
-          size="small"
-          onClick={() => {
-            dispatch(deletePost(post._id));
-          }}
-        >
-          <DeleteIcon fontSize="small">Delete</DeleteIcon>
-        </Button>
+        {/* This is going to only now appear if the logged in person is the creator of the Post, see how that works. */}
+        {user?.result?._id === post?.creator && (
+          <Button
+            color="primary"
+            size="small"
+            onClick={() => {
+              dispatch(deletePost(post._id));
+            }}
+          >
+            <DeleteIcon fontSize="small">Delete</DeleteIcon>
+          </Button>
+        )}
       </CardActions>
     </Card>
   );
