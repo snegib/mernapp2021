@@ -7,7 +7,7 @@ import { createPost, updatePost } from '../../actions/posts';
 
 const Form = ({ currentId, setCurrentId }) => {
   const [postData, setPostData] = useState({
-    creator: '',
+    // creator: '',
     title: '',
     message: '',
     tags: '',
@@ -23,6 +23,7 @@ const Form = ({ currentId, setCurrentId }) => {
 
   const classes = useStyles();
   const dispatch = useDispatch();
+  const user = JSON.parse(localStorage.getItem('profile'));
 
   /* So it's in here, we say when this callback function should be run and what changes. Well.When the post value changes from nothing to the actual post and we want to run this function, then in here we're going to say if post exists, then we're going to setPostData(post). And remember, that's our state field here, setPostData, and we are simply going to populate it
    useEffect(() => {  }, [post]);
@@ -38,22 +39,32 @@ post now inside of there, we're going to pass all the data from our state post d
     console.log('hello postData ', postData);
     /* If we have a currentId, which means that if the currentId is not known. Then we're not going to dispatch a createPost. We are going to dispatch something different. And that's something different is going to be this time updatePost. But keep in mind with updatePost, we need to also know the ID.. So the postData is going to be the second parameter, first parameter is going to be the currentId. And else we're going to dispatch a createPost. So if we don't have a currently selected ID., that must mean that we are creating a post and not updating it. */
     if (currentId) {
-      dispatch(updatePost(currentId, postData));
+      dispatch(
+        updatePost(currentId, { ...postData, name: user?.result?.name })
+      );
     } else {
-      dispatch(createPost(postData));
+      dispatch(createPost({ ...postData, name: user?.result?.name }));
     }
     clear();
   };
   const clear = () => {
     setCurrentId(null);
     setPostData({
-      creator: '',
+      // creator: '',
       title: '',
       message: '',
       tags: '',
       selectedFile: '',
     });
   };
+
+  if (!user?.result?.name) {
+    return (
+      <Paper className={classes.paper}>
+        <Typography variant="h6" align='center'>Please sign in to create your own posts and like other's posts.</Typography>
+      </Paper>
+    );
+  }
   return (
     <Paper className={classes.paper}>
       <form
@@ -65,7 +76,7 @@ post now inside of there, we're going to pass all the data from our state post d
         <Typography variant="h6">
           {currentId ? 'Editing' : 'Createing'} a Post
         </Typography>
-        <TextField
+        {/* <TextField
           name="creator"
           variant="outlined"
           label="Creator"
@@ -74,7 +85,7 @@ post now inside of there, we're going to pass all the data from our state post d
           onChange={e => {
             setPostData({ ...postData, creator: e.target.value });
           }}
-        ></TextField>
+        ></TextField> */}
         {/* What we actually have to do is first spread the postData. So that's ...postData And then we have a creator right there. That means that in every text field, if we do the same thing, but only change the last property. Well, that means all the data is going to persist while changing only this specific property of that specific text field. */}
         <TextField
           name="title"
