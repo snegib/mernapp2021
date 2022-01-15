@@ -5,6 +5,7 @@ const auth = async (req, res, next) => {};
 but all middleware, has something known as next. So that means do something and then move to the next thing.
  */
 const auth = async (req, res, next) => {
+  console.log('**** middleware user auth **** ', req, res);
   try {
     /* All right, so after the user is signed up or signed in, they get this specific token. Now, when they want to do something like they'll be delete a post or like a post. Well, we have to check if this token is valid and that's what we're doing with this right here. */
     console.log('middleware req header ', req.headers);

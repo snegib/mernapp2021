@@ -22,10 +22,11 @@ app.use(
   postRoutes
 ); /* Every routes inside the posRoutes reach by //localhost:5000/posts prefix routes. So 'posts' is prefixed word here */
 
-app.use(
-  '/user',
-  userRoutes
-); 
+app.use('/user', userRoutes);
+
+app.get('/', (req, res) => {
+  res.send('Welcome to Instaverse API');
+});
 /* 
 const CONNECTION_URL =
   'mongodb+srv://suman:12345@cluster0.khqhx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
